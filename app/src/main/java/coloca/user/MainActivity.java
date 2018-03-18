@@ -8,16 +8,24 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import coloca.user.adapters.DestinationAdapter;
+import coloca.user.adapters.TopTourGuideAdapter;
 import coloca.user.fragments.IklanFragment;
+import coloca.user.listeners.Main;
+import coloca.user.models.destination.DestinationResult;
+import coloca.user.models.guide.TourGuideResult;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "cekMain";
@@ -33,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
     private Runnable runnable;
     private int idxIklan;
 
+    List<DestinationResult> listDestination;
+    DestinationAdapter destinationAdapter;
+
+    List<TourGuideResult> listTopTourGuide;
+    TopTourGuideAdapter topTourGuideAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +55,69 @@ public class MainActivity extends AppCompatActivity {
 
         callIklanData();
         setUpViewPager();
+
+        setDestinationData();
+        setTopTourGuideData();
+
+        callDestinationData();
+        callTopTourGuideData();
+
+        edtSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edtSearch.setCursorVisible(true);
+            }
+        });
+    }
+
+    private void callTopTourGuideData() {
+        listTopTourGuide = new ArrayList<>();
+        listTopTourGuide.add(new TourGuideResult(1, R.mipmap.ic_launcher, "Joko"));
+        listTopTourGuide.add(new TourGuideResult(1, R.mipmap.ic_launcher, "Joko"));
+        listTopTourGuide.add(new TourGuideResult(1, R.mipmap.ic_launcher, "Joko"));
+        listTopTourGuide.add(new TourGuideResult(1, R.mipmap.ic_launcher, "Joko"));
+        listTopTourGuide.add(new TourGuideResult(1, R.mipmap.ic_launcher, "Joko"));
+        listTopTourGuide.add(new TourGuideResult(1, R.mipmap.ic_launcher, "Joko"));
+        topTourGuideAdapter.refreshData(listTopTourGuide);
+    }
+
+    private void callDestinationData() {
+        listDestination = new ArrayList<>();
+        listDestination.add(new DestinationResult(1, R.mipmap.ic_launcher, "Bali"));
+        listDestination.add(new DestinationResult(1, R.mipmap.ic_launcher, "Bali"));
+        listDestination.add(new DestinationResult(1, R.mipmap.ic_launcher, "Bali"));
+        listDestination.add(new DestinationResult(1, R.mipmap.ic_launcher, "Bali"));
+        listDestination.add(new DestinationResult(1, R.mipmap.ic_launcher, "Bali"));
+        listDestination.add(new DestinationResult(1, R.mipmap.ic_launcher, "Bali"));
+        destinationAdapter.refreshData(listDestination);
+    }
+
+    private void setTopTourGuideData() {
+        listTopTourGuide = new ArrayList<>();
+        final LinearLayoutManager llm = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        rvTopTourGuide.setLayoutManager(llm);
+
+        topTourGuideAdapter = new TopTourGuideAdapter(new Main.OnTourGuideClicked() {
+            @Override
+            public void onClick(TourGuideResult tourGuideResult) {
+                Toast.makeText(MainActivity.this, tourGuideResult.getName(), Toast.LENGTH_SHORT).show();
+            }
+        }, listTopTourGuide, getApplicationContext());
+        rvTopTourGuide.setAdapter(topTourGuideAdapter);
+    }
+
+    private void setDestinationData() {
+        listDestination = new ArrayList<>();
+        final LinearLayoutManager llm = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        rvTopDestination.setLayoutManager(llm);
+
+        destinationAdapter = new DestinationAdapter(new Main.OnDestinationClicked() {
+            @Override
+            public void onClick(DestinationResult destinationResult) {
+                Toast.makeText(MainActivity.this, destinationResult.getDestinationName(), Toast.LENGTH_SHORT).show();
+            }
+        }, listDestination, getApplicationContext());
+        rvTopDestination.setAdapter(destinationAdapter);
     }
 
     private void setUpViewPager() {
