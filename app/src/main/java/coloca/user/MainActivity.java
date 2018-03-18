@@ -1,5 +1,6 @@
 package coloca.user;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.edt_search) EditText edtSearch;
     @BindView(R.id.rv_top_destination) RecyclerView rvTopDestination;
     @BindView(R.id.rv_top_tour_guide) RecyclerView rvTopTourGuide;
+    @BindView(R.id.btn_go)
+    Button btnGo;
 
     List<Integer> listIklan;
     ViewPagerAdapter adapter;
@@ -52,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         callIklanData();
         setUpViewPager();
@@ -68,6 +73,18 @@ public class MainActivity extends AppCompatActivity {
                 edtSearch.setCursorVisible(true);
             }
         });
+
+        btnGo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToDetailDestination();
+            }
+        });
+    }
+
+    private void goToDetailDestination(){
+        Intent intent = new Intent(getApplicationContext(), DetailDestinationActivity.class);
+        startActivity(intent);
     }
 
     private void callTopTourGuideData() {
