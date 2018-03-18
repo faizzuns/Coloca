@@ -1,5 +1,6 @@
 package coloca.user;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -54,6 +54,13 @@ public class DetailDestinationActivity extends AppCompatActivity {
             }
         });
 
+        btnTourGuide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToListTourGuide();
+            }
+        });
+
     }
 
     @Override
@@ -88,5 +95,10 @@ public class DetailDestinationActivity extends AppCompatActivity {
         listTweet = new ArrayList<>();
         for (int i = 0; i < 10; i++) listTweet.add(new TweetResult(i,"@faizzuns","27 Jan 2018, 13:00","ea eae ea ea ea e f d dj dn ja k  dn jdnsdnsdsd j dndfjfa nsfvsfksk n nvskvbjvsfmvs dfnfdfdf knvksjknvkdgkkdbfdnfdgfdgf"));
         adapter.refreshData(listTweet);
+    }
+
+    private void goToListTourGuide(){
+        Intent intent = new Intent(getApplicationContext(), ListTourGuideActivity.class);
+        startActivity(intent);
     }
 }
