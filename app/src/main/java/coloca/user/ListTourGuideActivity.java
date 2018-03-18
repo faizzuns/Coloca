@@ -32,6 +32,7 @@ public class ListTourGuideActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_tour_guide);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Pantai Tanjung Lesung");
         
         setDataTourGuide();
         callTourGuideData();
@@ -73,7 +74,12 @@ public class ListTourGuideActivity extends AppCompatActivity {
 
     private void callTourGuideData(){
         listTour = new ArrayList<>();
-        for (int i = 0; i < 8; i++) listTour.add(new TourGuideResult(i, R.mipmap.ic_launcher, "Joko Susili", "Location : Bandung, Bali", "Language : Japanese"));
+        listTour.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5kh2SfoLiz8Q4GkyXZM0N-pWg5EYj3WVm-CN51oWy70mETRl5", "Putri Charity", "Location : Banten", "Language : English"));
+        listTour.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0SNB_ZVcARJpr_j8zd2q0aw8n0jAjYaQBnN7YBuaMijfJCSWy", "Liam Chandra", "Location : Banten", "Language : English"));
+        listTour.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGIeez53rOV2I2E5n3LZPKYAG-P4SUUoaKW1FDHIyTqJqarz5a", "Joko Susilo", "Location : Banten", "Language : English"));
+        listTour.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ3H-UkGKMNZQa3eUq4sbGfcSaDZTnFf3xJ40W7T__kNZuR6hW", "Fatimah", "Location : Banten", "Language : English"));
+        listTour.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFgYKGsXpzM8dMav_9JM4F9mNxDDTTLgIPOf4EaOh9YVu0Cr3t", "Peter Basambuhan", "Location : Banten", "Language : English"));
+        listTour.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBRjyFVt96v63XVx3amRtaqoaW26A7AhuA3505FwOsGmLuJAc9", "Olivia Sandro", "Location : Banten", "Language : English"));
         adapter.refreshData(listTour);
     }
 

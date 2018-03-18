@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.btn_go)
     Button btnGo;
 
-    List<Integer> listIklan;
+    List<String> listIklan;
     ViewPagerAdapter adapter;
     private Handler handler;
     private Runnable runnable;
@@ -89,23 +89,23 @@ public class MainActivity extends AppCompatActivity {
 
     private void callTopTourGuideData() {
         listTopTourGuide = new ArrayList<>();
-        listTopTourGuide.add(new TourGuideResult(1, R.mipmap.ic_launcher, "Joko"));
-        listTopTourGuide.add(new TourGuideResult(1, R.mipmap.ic_launcher, "Joko"));
-        listTopTourGuide.add(new TourGuideResult(1, R.mipmap.ic_launcher, "Joko"));
-        listTopTourGuide.add(new TourGuideResult(1, R.mipmap.ic_launcher, "Joko"));
-        listTopTourGuide.add(new TourGuideResult(1, R.mipmap.ic_launcher, "Joko"));
-        listTopTourGuide.add(new TourGuideResult(1, R.mipmap.ic_launcher, "Joko"));
+        listTopTourGuide.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5kh2SfoLiz8Q4GkyXZM0N-pWg5EYj3WVm-CN51oWy70mETRl5", "Putri Charity"));
+        listTopTourGuide.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0SNB_ZVcARJpr_j8zd2q0aw8n0jAjYaQBnN7YBuaMijfJCSWy", "Liam Chandra"));
+        listTopTourGuide.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGIeez53rOV2I2E5n3LZPKYAG-P4SUUoaKW1FDHIyTqJqarz5a", "Joko Susilo"));
+        listTopTourGuide.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ3H-UkGKMNZQa3eUq4sbGfcSaDZTnFf3xJ40W7T__kNZuR6hW", "Fatimah"));
+        listTopTourGuide.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFgYKGsXpzM8dMav_9JM4F9mNxDDTTLgIPOf4EaOh9YVu0Cr3t", "Peter Basambuhan"));
+        listTopTourGuide.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBRjyFVt96v63XVx3amRtaqoaW26A7AhuA3505FwOsGmLuJAc9", "Olivia Sandro"));
         topTourGuideAdapter.refreshData(listTopTourGuide);
     }
 
     private void callDestinationData() {
         listDestination = new ArrayList<>();
-        listDestination.add(new DestinationResult(1, R.mipmap.ic_launcher, "Bali"));
-        listDestination.add(new DestinationResult(1, R.mipmap.ic_launcher, "Bali"));
-        listDestination.add(new DestinationResult(1, R.mipmap.ic_launcher, "Bali"));
-        listDestination.add(new DestinationResult(1, R.mipmap.ic_launcher, "Bali"));
-        listDestination.add(new DestinationResult(1, R.mipmap.ic_launcher, "Bali"));
-        listDestination.add(new DestinationResult(1, R.mipmap.ic_launcher, "Bali"));
+        listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/ALDO1553_edit.jpg", "Danau Toba"));
+        listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/DSC00368.jpg", "Pantai Tanjung Kelayang"));
+        listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/DSC_0409.jpg", "Pantai Tanjung Lesung"));
+        listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/pulau-ayer-2-kep-seribu.jpg", "Kepulauan Seribu"));
+        listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/DIY-BOROBUDUR-SUNSET-1.jpg", "Candi Borobudur"));
+        listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/bromo_20140505232301-d7ff595f.jpg", "Gunung Bromo"));
         destinationAdapter.refreshData(listDestination);
     }
 
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
     private void setUpViewPager() {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        for (int iklan : listIklan){
+        for (String iklan : listIklan){
             adapter.addFragment(new IklanFragment(iklan), "");
         }
 
@@ -185,10 +185,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void callIklanData() {
         listIklan = new ArrayList<>();
-        listIklan.add(R.drawable.iklan_1);
-        listIklan.add(R.drawable.iklan_2);
-        listIklan.add(R.drawable.iklan_3);
-        listIklan.add(R.drawable.iklan_4);
+        listIklan.add("http://kampoengpromo.com/wp-content/uploads/2015/11/Header-Slide-New-4.jpg");
+        listIklan.add("https://www.rwd.co.id/media/2017/07/banner-promo-fb-iklan-2.png");
+        listIklan.add("https://www.rwd.co.id/media/2017/07/banner-promo-fb-baru.png");
+        listIklan.add("http://cdn2.tstatic.net/solo/foto/bank/images/tiketcom-beri-diskon-tiket-kereta-api_20160804_163125.jpg");
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

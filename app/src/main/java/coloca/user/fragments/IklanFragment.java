@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 
+import com.squareup.picasso.Picasso;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import coloca.user.R;
@@ -22,14 +24,14 @@ public class IklanFragment extends Fragment {
     @BindView(R.id.img_iklan)
     ImageView imgIklan;
 
-    private int iklan;
+    private String iklan;
 
     public IklanFragment() {
         // Required empty public constructor
     }
 
     @SuppressLint("ValidFragment")
-    public IklanFragment(int iklan){
+    public IklanFragment(String iklan){
         this.iklan = iklan;
     }
 
@@ -46,6 +48,6 @@ public class IklanFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        imgIklan.setImageResource(iklan);
+        Picasso.with(getContext()).load(iklan).into(imgIklan);
     }
 }

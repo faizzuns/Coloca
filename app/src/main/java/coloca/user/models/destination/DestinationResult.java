@@ -8,10 +8,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class DestinationResult {
     private int id;
-    private int imgUrl;
+    private String imgUrl;
     private String destinationName;
 
-    public DestinationResult(int id, int imgUrl, String destinationName) {
+    public DestinationResult(int id, String imgUrl, String destinationName) {
         this.id = id;
         this.imgUrl = imgUrl;
         this.destinationName = destinationName;
@@ -25,11 +25,11 @@ public class DestinationResult {
         this.id = id;
     }
 
-    public int getImgUrl() {
+    public String getImgUrl() {
         return imgUrl;
     }
 
-    public void setImgUrl(int imgUrl) {
+    public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
 

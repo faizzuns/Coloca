@@ -6,18 +6,18 @@ package coloca.user.models.guide;
 
 public class TourGuideResult {
     private int id;
-    private int imgUrl;
+    private String imgUrl;
     private String name;
     private String location;
     private String language;
 
-    public TourGuideResult(int id, int imgUrl, String name) {
+    public TourGuideResult(int id, String imgUrl, String name) {
         this.id = id;
         this.imgUrl = imgUrl;
         this.name = name;
     }
 
-    public TourGuideResult(int id, int imgUrl, String name, String location, String language) {
+    public TourGuideResult(int id, String imgUrl, String name, String location, String language) {
         this.id = id;
         this.imgUrl = imgUrl;
         this.name = name;
@@ -49,11 +49,11 @@ public class TourGuideResult {
         this.id = id;
     }
 
-    public int getImgUrl() {
+    public String getImgUrl() {
         return imgUrl;
     }
 
-    public void setImgUrl(int imgUrl) {
+    public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
 

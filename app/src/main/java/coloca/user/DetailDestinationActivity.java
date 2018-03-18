@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,6 +63,9 @@ public class DetailDestinationActivity extends AppCompatActivity {
             }
         });
 
+        Picasso.with(getApplicationContext()).load("https://blog.traveloka.com/wp-content/uploads/2017/08/DSC_0409.jpg").into(imgDestination);
+
+
     }
 
     @Override
@@ -93,7 +98,11 @@ public class DetailDestinationActivity extends AppCompatActivity {
 
     private void callData(){
         listTweet = new ArrayList<>();
-        for (int i = 0; i < 10; i++) listTweet.add(new TweetResult(i,"@faizzuns","27 Jan 2018, 13:00","ea eae ea ea ea e f d dj dn ja k  dn jdnsdnsdsd j dndfjfa nsfvsfksk n nvskvbjvsfmvs dfnfdfdf knvksjknvkdgkkdbfdnfdgfdgf"));
+        listTweet.add(new TweetResult(1,"@faizzuns","27 Jan 2018, 13:00","Pantai Tanjung Lesung is very beautiful!! i want go there again :("));
+        listTweet.add(new TweetResult(2, "@KingJames", "27 Jan 2018 15:00", "I'm very happy that i can go to Pantai Tanjung Lesung! There is a baby shark swim with me."));
+        listTweet.add(new TweetResult(3, "@sodikooo", "28 Jan 2018 10:00", "Pantai Tanjung Lesung has a good scenery! very love this view <3 <3"));
+        listTweet.add(new TweetResult(4, "@denailry", "29 Jan 2018 18:00", "heaven in Indonesia! (Pantai Tanjung Lesung)"));
+        listTweet.add(new TweetResult(5, "@ilhamfp", "30 Jan 2018 13:32", "Why i just come here 3 days?!??!?! i want to stay in here more!!in Pantai Tanjung Lesung dude!"));
         adapter.refreshData(listTweet);
     }
 

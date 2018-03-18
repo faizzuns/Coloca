@@ -23,13 +23,22 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bali"
+            android:text="Pantai Tanjung Lesung"
             android:textSize="20sp"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
             android:id="@+id/txt_destination"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="City : Banten"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:textSize="15sp"
+            android:id="@+id/txt_city_destination"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -52,7 +61,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Timezone : GMT +8"
+            android:text="Timezone : GMT +7"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:textSize="15sp"
@@ -61,7 +70,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Estimated Cost : Rp 1.000.000,-"
+            android:text="Estimated Cost : Rp 2.000.000,-"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:textSize="15sp"
