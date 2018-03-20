@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    tools:context="coloca.user.DetailTourGuideActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/ic_launcher"
+            android:id="@+id/img_photo_tour_guide"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Liam Chandra"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:id="@+id/txt_name_tour_guide"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location : Bali, Bandung, Lombok"
+            android:layout_marginTop="5dp"
+            android:id="@+id/txt_location_tour_guide"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Language : English, Spanish"
+            android:layout_marginTop="5dp"
+            android:id="@+id/txt_language_tour_guide"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="30dp"
+            android:padding="5dp"
+            android:id="@+id/root_order"
+            android:visibility="gone">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/rounded_list"
+                android:paddingLeft="10dp"
+                android:hint="Name"
+                android:inputType="text"
+                android:id="@+id/edt_name_order"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/rounded_list"
+                android:paddingLeft="10dp"
+                android:hint="Email"
+                android:layout_marginTop="5dp"
+                android:inputType="textEmailAddress"
+                android:id="@+id/edt_email_order"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/rounded_list"
+                android:paddingLeft="10dp"
+                android:hint="Phone"
+                android:layout_marginTop="5dp"
+                android:inputType="phone"
+                android:id="@+id/edt_phone_order"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/rounded_list"
+                android:paddingLeft="10dp"
+                android:hint="Location"
+                android:layout_marginTop="5dp"
+                android:id="@+id/edt_location_order"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/rounded_list"
+                android:paddingLeft="10dp"
+                android:hint="Language"
+                android:layout_marginTop="5dp"
+                android:id="@+id/edt_language_order"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/rounded_list"
+                android:paddingLeft="10dp"
+                android:hint="Date"
+                android:layout_marginTop="5dp"
+                android:id="@+id/edt_date_order"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/rounded_list"
+                android:paddingLeft="10dp"
+                android:hint="End Date"
+                android:layout_marginTop="5dp"
+                android:id="@+id/edt_end_date_order"/>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:background="@color/colorPrimary"
+            android:text="Order"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/btn_order"/>
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:background="@color/colorPrimary"
+            android:text="Go To Home"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/btn_go_home"
+            android:visibility="gone"/>
+    </LinearLayout>
+</ScrollView>

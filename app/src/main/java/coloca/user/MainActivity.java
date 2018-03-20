@@ -77,13 +77,23 @@ public class MainActivity extends AppCompatActivity {
         btnGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToDetailDestination();
+                goToResultDestination();
             }
         });
     }
 
     private void goToDetailDestination(){
         Intent intent = new Intent(getApplicationContext(), DetailDestinationActivity.class);
+        startActivity(intent);
+    }
+
+    private void goToResultDestination(){
+        Intent intent = new Intent(getApplicationContext(), ResultDestinationActivity.class);
+        startActivity(intent);
+    }
+
+    private void goToDetailTourGuide(){
+        Intent intent = new Intent(getApplicationContext(), DetailTourGuideActivity.class);
         startActivity(intent);
     }
 
@@ -117,7 +127,8 @@ public class MainActivity extends AppCompatActivity {
         topTourGuideAdapter = new TopTourGuideAdapter(new Main.OnTourGuideClicked() {
             @Override
             public void onClick(TourGuideResult tourGuideResult) {
-                Toast.makeText(MainActivity.this, tourGuideResult.getName(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, tourGuideResult.getName(), Toast.LENGTH_SHORT).show();
+                goToDetailTourGuide();
             }
         }, listTopTourGuide, getApplicationContext());
         rvTopTourGuide.setAdapter(topTourGuideAdapter);
@@ -131,7 +142,8 @@ public class MainActivity extends AppCompatActivity {
         destinationAdapter = new DestinationAdapter(new Main.OnDestinationClicked() {
             @Override
             public void onClick(DestinationResult destinationResult) {
-                Toast.makeText(MainActivity.this, destinationResult.getDestinationName(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, destinationResult.getDestinationName(), Toast.LENGTH_SHORT).show();
+                goToDetailDestination();
             }
         }, listDestination, getApplicationContext());
         rvTopDestination.setAdapter(destinationAdapter);

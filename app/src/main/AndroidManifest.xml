@@ -24,6 +24,8 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".ListTourGuideActivity" />
+        <activity android:name=".DetailTourGuideActivity" />
+        <activity android:name=".ResultDestinationActivity"></activity>
     </application>
 
 </manifest>

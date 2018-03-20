@@ -1,6 +1,7 @@
 package coloca.user;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,6 +55,7 @@ public class ListTourGuideActivity extends AppCompatActivity {
                         switch (which){
                             case DialogInterface.BUTTON_POSITIVE:
                                 //Yes button clicked
+                                goToDetailTourGuide();
                                 break;
 
                             case DialogInterface.BUTTON_NEGATIVE:
@@ -81,6 +83,11 @@ public class ListTourGuideActivity extends AppCompatActivity {
         listTour.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFgYKGsXpzM8dMav_9JM4F9mNxDDTTLgIPOf4EaOh9YVu0Cr3t", "Peter Basambuhan", "Location : Banten", "Language : English"));
         listTour.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBRjyFVt96v63XVx3amRtaqoaW26A7AhuA3505FwOsGmLuJAc9", "Olivia Sandro", "Location : Banten", "Language : English"));
         adapter.refreshData(listTour);
+    }
+
+    private void goToDetailTourGuide(){
+        Intent intent = new Intent(getApplicationContext(), DetailTourGuideActivity.class);
+        startActivity(intent);
     }
 
     @Override
