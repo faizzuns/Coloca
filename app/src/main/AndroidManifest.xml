@@ -25,7 +25,8 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".ListTourGuideActivity" />
         <activity android:name=".DetailTourGuideActivity" />
-        <activity android:name=".ResultDestinationActivity"></activity>
+        <activity android:name=".ResultDestinationActivity" />
+        <activity android:name=".RouteActivity"></activity>
     </application>
 
 </manifest>

@@ -59,12 +59,12 @@ public class ResultDestinationActivity extends AppCompatActivity {
 
     private void callDestinationData() {
         listDestination = new ArrayList<>();
-        listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/ALDO1553_edit.jpg", "Danau Toba"));
+        //listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/ALDO1553_edit.jpg", "Danau Toba"));
         listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/DSC00368.jpg", "Pantai Tanjung Kelayang"));
         listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/DSC_0409.jpg", "Pantai Tanjung Lesung"));
-        listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/pulau-ayer-2-kep-seribu.jpg", "Kepulauan Seribu"));
-        listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/DIY-BOROBUDUR-SUNSET-1.jpg", "Candi Borobudur"));
-        listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/bromo_20140505232301-d7ff595f.jpg", "Gunung Bromo"));
+        //listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/pulau-ayer-2-kep-seribu.jpg", "Kepulauan Seribu"));
+        //listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/DIY-BOROBUDUR-SUNSET-1.jpg", "Candi Borobudur"));
+        //listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/bromo_20140505232301-d7ff595f.jpg", "Gunung Bromo"));
         destinationAdapter.refreshData(listDestination);
     }
 

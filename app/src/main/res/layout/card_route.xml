@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="4dp"
+    app:cardBackgroundColor="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/icon_awal"
+            android:layout_centerVertical="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/icon_awal"
+            android:layout_toLeftOf="@id/arrow"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="Stasiun Karawang"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:textSize="13sp"
+            android:id="@+id/txt_awal"/>
+        <ImageView
+            android:layout_width="55dp"
+            android:layout_height="27dp"
+            android:src="@drawable/ic_action_arrow"
+            android:layout_centerInParent="true"
+            android:scaleType="fitXY"
+            android:id="@+id/arrow"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/arrow"
+            android:layout_toLeftOf="@id/icon_akhir"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="Stasiun Bekasi"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:textSize="13sp"
+            android:id="@+id/txt_akhir"/>
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_alignParentRight="true"
+            android:id="@+id/icon_akhir"
+            android:scaleType="fitXY"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

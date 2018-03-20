@@ -63,9 +63,21 @@ public class DetailDestinationActivity extends AppCompatActivity {
             }
         });
 
+        btnRoute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToDetailRoute();
+            }
+        });
+
         Picasso.with(getApplicationContext()).load("https://blog.traveloka.com/wp-content/uploads/2017/08/DSC_0409.jpg").into(imgDestination);
 
 
+    }
+
+    private void goToDetailRoute() {
+        Intent intent = new Intent(getApplicationContext(), RouteActivity.class);
+        startActivity(intent);
     }
 
     @Override
