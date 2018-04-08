@@ -59,8 +59,8 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.ViewHolder> 
 
         Picasso.with(context).load(routeResult.getIconAwal()).into(holder.iconAwal);
         Picasso.with(context).load(routeResult.getIconAkhir()).into(holder.iconAkhir);
-        holder.txtAwal.setText(routeResult.getTxtAwal());
-        holder.txtAkhir.setText(routeResult.getTxtAkhir());
+        holder.txtAwal.setText(routeResult.getOrigin());
+        holder.txtAkhir.setText(routeResult.getDest());
     }
 
     @Override

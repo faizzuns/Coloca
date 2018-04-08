@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import coloca.user.R;
 import coloca.user.listeners.Main;
 import coloca.user.models.destination.DestinationResult;
+import coloca.user.models.guide.AllTourGuideModel;
 import coloca.user.models.guide.TourGuideResult;
 
 /**
@@ -26,10 +27,10 @@ import coloca.user.models.guide.TourGuideResult;
 public class TopTourGuideAdapter extends RecyclerView.Adapter<TopTourGuideAdapter.ViewHolder>{
 
     Main.OnTourGuideClicked listener;
-    List<TourGuideResult> list;
+    List<AllTourGuideModel.TourGuideData> list;
     Context context;
 
-    public TopTourGuideAdapter(Main.OnTourGuideClicked listener, List<TourGuideResult> list, Context context) {
+    public TopTourGuideAdapter(Main.OnTourGuideClicked listener, List<AllTourGuideModel.TourGuideData> list, Context context) {
         this.listener = listener;
         this.list = list;
         this.context = context;
@@ -57,7 +58,7 @@ public class TopTourGuideAdapter extends RecyclerView.Adapter<TopTourGuideAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final TourGuideResult tourGuideResult= list.get(position);
+        final AllTourGuideModel.TourGuideData tourGuideResult= list.get(position);
 
         Picasso.with(context).load(tourGuideResult.getImgUrl()).into(holder.img);
         holder.txt.setText(tourGuideResult.getName());
@@ -78,7 +79,7 @@ public class TopTourGuideAdapter extends RecyclerView.Adapter<TopTourGuideAdapte
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
     }
-    public void refreshData(List<TourGuideResult> list){
+    public void refreshData(List<AllTourGuideModel.TourGuideData> list){
         this.list = list;
         notifyDataSetChanged();
     }

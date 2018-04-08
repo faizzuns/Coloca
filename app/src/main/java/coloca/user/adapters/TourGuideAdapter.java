@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import coloca.user.R;
 import coloca.user.listeners.Destination;
 import coloca.user.listeners.Main;
+import coloca.user.models.guide.AllTourGuideModel;
 import coloca.user.models.guide.TourGuideResult;
 import coloca.user.models.tweet.TweetResult;
 
@@ -27,10 +28,10 @@ import coloca.user.models.tweet.TweetResult;
 public class TourGuideAdapter extends RecyclerView.Adapter<TourGuideAdapter.ViewHolder>{
 
     Main.OnTourGuideClicked listener;
-    List<TourGuideResult> list;
+    List<AllTourGuideModel.TourGuideData> list;
     Context context;
 
-    public TourGuideAdapter(Main.OnTourGuideClicked listener, List<TourGuideResult> list, Context context) {
+    public TourGuideAdapter(Main.OnTourGuideClicked listener, List<AllTourGuideModel.TourGuideData> list, Context context) {
         this.listener = listener;
         this.list = list;
         this.context = context;
@@ -61,12 +62,12 @@ public class TourGuideAdapter extends RecyclerView.Adapter<TourGuideAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final TourGuideResult tourGuideResult= list.get(position);
+        final AllTourGuideModel.TourGuideData tourGuideResult= list.get(position);
 
         Picasso.with(context).load(tourGuideResult.getImgUrl()).into(holder.imgPhotoTour);
         holder.txtName.setText(tourGuideResult.getName());
-        holder.txtLocation.setText(tourGuideResult.getLocation().get(0));
-        holder.txtLanguage.setText(tourGuideResult.getLanguage().get(0));
+        if (tourGuideResult.getListLocation().size() != 0) holder.txtLocation.setText(tourGuideResult.getListLocation().get(0));
+        if (tourGuideResult.getListLanguage().size() != 0) holder.txtLanguage.setText(tourGuideResult.getListLanguage().get(0));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,7 +85,7 @@ public class TourGuideAdapter extends RecyclerView.Adapter<TourGuideAdapter.View
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
     }
-    public void refreshData(List<TourGuideResult> list){
+    public void refreshData(List<AllTourGuideModel.TourGuideData> list){
         this.list = list;
         notifyDataSetChanged();
     }

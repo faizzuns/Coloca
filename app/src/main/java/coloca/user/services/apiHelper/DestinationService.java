@@ -7,5 +7,5 @@ import retrofit2.http.Path;
 
 public interface DestinationService {
     @GET("place/id/{id_destination}")
-    Call<DestinationModel> callDestination(@Path("id_destination") String id);
+    Call<DestinationModel> callDestination(@Path("id_destination") int id);
 }

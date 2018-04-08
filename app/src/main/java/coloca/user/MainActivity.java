@@ -26,8 +26,14 @@ import coloca.user.adapters.DestinationAdapter;
 import coloca.user.adapters.TopTourGuideAdapter;
 import coloca.user.fragments.IklanFragment;
 import coloca.user.listeners.Main;
+import coloca.user.models.destination.AllPlaceModel;
 import coloca.user.models.destination.DestinationResult;
+import coloca.user.models.guide.AllTourGuideModel;
 import coloca.user.models.guide.TourGuideResult;
+import coloca.user.services.RetrofitServices;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "cekMain";
@@ -45,10 +51,10 @@ public class MainActivity extends AppCompatActivity {
     private Runnable runnable;
     private int idxIklan;
 
-    List<DestinationResult> listDestination;
+    List<AllPlaceModel.PlaceData> listDestination;
     DestinationAdapter destinationAdapter;
 
-    List<TourGuideResult> listTopTourGuide;
+    List<AllTourGuideModel.TourGuideData> listTopTourGuide;
     TopTourGuideAdapter topTourGuideAdapter;
 
     @Override
@@ -77,46 +83,67 @@ public class MainActivity extends AppCompatActivity {
         btnGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToResultDestination();
+                goToResultDestination(edtSearch.getText().toString());
             }
         });
     }
 
-    private void goToDetailDestination(){
+    private void goToDetailDestination(int id){
         Intent intent = new Intent(getApplicationContext(), DetailDestinationActivity.class);
+        intent.putExtra("id_dest",id);
         startActivity(intent);
     }
 
-    private void goToResultDestination(){
+    private void goToResultDestination(String keyword){
         Intent intent = new Intent(getApplicationContext(), ResultDestinationActivity.class);
+        intent.putExtra("search",keyword);
         startActivity(intent);
     }
 
-    private void goToDetailTourGuide(){
+    private void goToDetailTourGuide(int id){
         Intent intent = new Intent(getApplicationContext(), DetailTourGuideActivity.class);
+        intent.putExtra("id_guide",id);
         startActivity(intent);
     }
 
     private void callTopTourGuideData() {
         listTopTourGuide = new ArrayList<>();
-        listTopTourGuide.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5kh2SfoLiz8Q4GkyXZM0N-pWg5EYj3WVm-CN51oWy70mETRl5", "Putri Charity"));
-        listTopTourGuide.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0SNB_ZVcARJpr_j8zd2q0aw8n0jAjYaQBnN7YBuaMijfJCSWy", "Liam Chandra"));
-        listTopTourGuide.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGIeez53rOV2I2E5n3LZPKYAG-P4SUUoaKW1FDHIyTqJqarz5a", "Joko Susilo"));
-        listTopTourGuide.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ3H-UkGKMNZQa3eUq4sbGfcSaDZTnFf3xJ40W7T__kNZuR6hW", "Fatimah"));
-        listTopTourGuide.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFgYKGsXpzM8dMav_9JM4F9mNxDDTTLgIPOf4EaOh9YVu0Cr3t", "Peter Basambuhan"));
-        listTopTourGuide.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBRjyFVt96v63XVx3amRtaqoaW26A7AhuA3505FwOsGmLuJAc9", "Olivia Sandro"));
-        topTourGuideAdapter.refreshData(listTopTourGuide);
+        Call<AllTourGuideModel> call = RetrofitServices.sendAllGuideRequest().callAllGuide(null, null, 10, 0);
+        call.enqueue(new Callback<AllTourGuideModel>() {
+            @Override
+            public void onResponse(Call<AllTourGuideModel> call, Response<AllTourGuideModel> response) {
+                if (response.body() != null){
+                    if (response.body().getError() == null){
+                        if (topTourGuideAdapter != null) topTourGuideAdapter.refreshData(response.body().getList());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AllTourGuideModel> call, Throwable t) {
+
+            }
+        });
     }
 
     private void callDestinationData() {
         listDestination = new ArrayList<>();
-        listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/ALDO1553_edit.jpg", "Danau Toba"));
-        listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/DSC00368.jpg", "Pantai Tanjung Kelayang"));
-        listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/DSC_0409.jpg", "Pantai Tanjung Lesung"));
-        listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/pulau-ayer-2-kep-seribu.jpg", "Kepulauan Seribu"));
-        listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/DIY-BOROBUDUR-SUNSET-1.jpg", "Candi Borobudur"));
-        listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/bromo_20140505232301-d7ff595f.jpg", "Gunung Bromo"));
-        destinationAdapter.refreshData(listDestination);
+        Call<AllPlaceModel> call = RetrofitServices.sendTopTenRequest().callTopTen();
+        call.enqueue(new Callback<AllPlaceModel>() {
+            @Override
+            public void onResponse(Call<AllPlaceModel> call, Response<AllPlaceModel> response) {
+                if (response.body() != null){
+                    if (response.body().getError() == null){
+                        if (destinationAdapter != null) destinationAdapter.refreshData(response.body().getList());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AllPlaceModel> call, Throwable t) {
+
+            }
+        });
     }
 
     private void setTopTourGuideData() {
@@ -126,9 +153,9 @@ public class MainActivity extends AppCompatActivity {
 
         topTourGuideAdapter = new TopTourGuideAdapter(new Main.OnTourGuideClicked() {
             @Override
-            public void onClick(TourGuideResult tourGuideResult) {
+            public void onClick(AllTourGuideModel.TourGuideData tourGuideResult) {
                 //Toast.makeText(MainActivity.this, tourGuideResult.getName(), Toast.LENGTH_SHORT).show();
-                goToDetailTourGuide();
+                goToDetailTourGuide(tourGuideResult.getIdGuide());
             }
         }, listTopTourGuide, getApplicationContext());
         rvTopTourGuide.setAdapter(topTourGuideAdapter);
@@ -141,9 +168,9 @@ public class MainActivity extends AppCompatActivity {
 
         destinationAdapter = new DestinationAdapter(new Main.OnDestinationClicked() {
             @Override
-            public void onClick(DestinationResult destinationResult) {
+            public void onClick(AllPlaceModel.PlaceData destinationResult) {
                 //Toast.makeText(MainActivity.this, destinationResult.getDestinationName(), Toast.LENGTH_SHORT).show();
-                goToDetailDestination();
+                goToDetailDestination(destinationResult.getId());
             }
         }, listDestination, getApplicationContext());
         rvTopDestination.setAdapter(destinationAdapter);
@@ -197,10 +224,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void callIklanData() {
         listIklan = new ArrayList<>();
-        listIklan.add("http://kampoengpromo.com/wp-content/uploads/2015/11/Header-Slide-New-4.jpg");
-        listIklan.add("https://www.rwd.co.id/media/2017/07/banner-promo-fb-iklan-2.png");
-        listIklan.add("https://www.rwd.co.id/media/2017/07/banner-promo-fb-baru.png");
-        listIklan.add("http://cdn2.tstatic.net/solo/foto/bank/images/tiketcom-beri-diskon-tiket-kereta-api_20160804_163125.jpg");
+        listIklan.add("https://tvlk.imgix.net/imageResource/2018/03/29/1522321109509-4feae2de0e7fa398357edc7c43f5a16b.png?auto=compress%2Cformat&cs=srgb&fm=png&ixlib=java-1.1.1&q=75");
+        listIklan.add("https://tvlk.imgix.net/imageResource/2018/03/15/1521107344756-d04be2ccb37ce88ec22abcfe32367696.jpeg?auto=compress%2Cformat&cs=srgb&fm=pjpg&ixlib=java-1.1.1&q=75");
+        listIklan.add("https://tvlk.imgix.net/imageResource/2018/01/31/1517388997076-b4d022ae07729574f59f1aa4ff0f4595.png?auto=compress%2Cformat&cs=srgb&fm=png&ixlib=java-1.1.1&q=75");
+        listIklan.add("https://tvlk.imgix.net/imageResource/2018/02/22/1519296560313-73d42395491259c4b45e7e2e7c25802b.jpeg?auto=compress%2Cformat&cs=srgb&fm=pjpg&ixlib=java-1.1.1&q=75");
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

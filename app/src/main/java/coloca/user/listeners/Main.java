@@ -1,6 +1,8 @@
 package coloca.user.listeners;
 
+import coloca.user.models.destination.AllPlaceModel;
 import coloca.user.models.destination.DestinationResult;
+import coloca.user.models.guide.AllTourGuideModel;
 import coloca.user.models.guide.TourGuideResult;
 
 /**
@@ -9,10 +11,10 @@ import coloca.user.models.guide.TourGuideResult;
 
 public interface Main {
     interface OnDestinationClicked{
-        void onClick(DestinationResult destinationResult);
+        void onClick(AllPlaceModel.PlaceData destinationResult);
     }
 
     interface OnTourGuideClicked{
-        void onClick(TourGuideResult tourGuideResult);
+        void onClick(AllTourGuideModel.TourGuideData tourGuideResult);
     }
 }

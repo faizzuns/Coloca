@@ -16,6 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import coloca.user.R;
 import coloca.user.listeners.Main;
+import coloca.user.models.destination.AllPlaceModel;
 import coloca.user.models.destination.DestinationResult;
 
 /**
@@ -25,10 +26,10 @@ import coloca.user.models.destination.DestinationResult;
 public class DestinationAdapter extends RecyclerView.Adapter<DestinationAdapter.ViewHolder>{
 
     Main.OnDestinationClicked listener;
-    List<DestinationResult> list;
+    List<AllPlaceModel.PlaceData> list;
     Context context;
 
-    public DestinationAdapter(Main.OnDestinationClicked listener, List<DestinationResult> list, Context context) {
+    public DestinationAdapter(Main.OnDestinationClicked listener, List<AllPlaceModel.PlaceData> list, Context context) {
         this.listener = listener;
         this.list = list;
         this.context = context;
@@ -56,10 +57,10 @@ public class DestinationAdapter extends RecyclerView.Adapter<DestinationAdapter.
 
     @Override
     public void onBindViewHolder(DestinationAdapter.ViewHolder holder, int position) {
-        final DestinationResult destinationResult = list.get(position);
+        final AllPlaceModel.PlaceData destinationResult = list.get(position);
 
         Picasso.with(context).load(destinationResult.getImgUrl()).into(holder.imgDestination);
-        holder.txtDestination.setText(destinationResult.getDestinationName());
+        holder.txtDestination.setText(destinationResult.getName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,7 +78,7 @@ public class DestinationAdapter extends RecyclerView.Adapter<DestinationAdapter.
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
     }
-    public void refreshData(List<DestinationResult> list){
+    public void refreshData(List<AllPlaceModel.PlaceData> list){
         this.list = list;
         notifyDataSetChanged();
     }

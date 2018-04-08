@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import coloca.user.adapters.TourGuideAdapter;
 import coloca.user.listeners.Main;
+import coloca.user.models.guide.AllTourGuideModel;
 import coloca.user.models.guide.TourGuideResult;
 
 public class ListTourGuideActivity extends AppCompatActivity {
@@ -25,7 +26,7 @@ public class ListTourGuideActivity extends AppCompatActivity {
     RecyclerView rvTourGuide;
 
     TourGuideAdapter adapter;
-    List<TourGuideResult> listTour;
+    List<AllTourGuideModel.TourGuideData> listTour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class ListTourGuideActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_tour_guide);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Pantai Tanjung Lesung");
+        getSupportActionBar().setTitle("Coloca");
         
         setDataTourGuide();
         callTourGuideData();
@@ -47,7 +48,7 @@ public class ListTourGuideActivity extends AppCompatActivity {
 
         adapter = new TourGuideAdapter(new Main.OnTourGuideClicked() {
             @Override
-            public void onClick(TourGuideResult tourGuideResult) {
+            public void onClick(final AllTourGuideModel.TourGuideData tourGuideResult) {
                 //Toast.makeText(ListTourGuideActivity.this, tourGuideResult.getName(), Toast.LENGTH_SHORT).show();
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                     @Override
@@ -55,7 +56,7 @@ public class ListTourGuideActivity extends AppCompatActivity {
                         switch (which){
                             case DialogInterface.BUTTON_POSITIVE:
                                 //Yes button clicked
-                                goToDetailTourGuide();
+                                goToDetailTourGuide(tourGuideResult.getIdGuide());
                                 break;
 
                             case DialogInterface.BUTTON_NEGATIVE:
@@ -76,17 +77,12 @@ public class ListTourGuideActivity extends AppCompatActivity {
 
     private void callTourGuideData(){
         listTour = new ArrayList<>();
-        listTour.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5kh2SfoLiz8Q4GkyXZM0N-pWg5EYj3WVm-CN51oWy70mETRl5", "Putri Charity", new ArrayList<String>(), new ArrayList<String>()));
-        listTour.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0SNB_ZVcARJpr_j8zd2q0aw8n0jAjYaQBnN7YBuaMijfJCSWy", "Liam Chandra", new ArrayList<String>(), new ArrayList<String>()));
-        listTour.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGIeez53rOV2I2E5n3LZPKYAG-P4SUUoaKW1FDHIyTqJqarz5a", "Joko Susilo", new ArrayList<String>(), new ArrayList<String>()));
-        listTour.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ3H-UkGKMNZQa3eUq4sbGfcSaDZTnFf3xJ40W7T__kNZuR6hW", "Fatimah", new ArrayList<String>(), new ArrayList<String>()));
-        listTour.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFgYKGsXpzM8dMav_9JM4F9mNxDDTTLgIPOf4EaOh9YVu0Cr3t", "Peter Basambuhan", new ArrayList<String>(), new ArrayList<String>()));
-        listTour.add(new TourGuideResult(1, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBRjyFVt96v63XVx3amRtaqoaW26A7AhuA3505FwOsGmLuJAc9", "Olivia Sandro", new ArrayList<String>(), new ArrayList<String>()));
         adapter.refreshData(listTour);
     }
 
-    private void goToDetailTourGuide(){
+    private void goToDetailTourGuide(int idGuide){
         Intent intent = new Intent(getApplicationContext(), DetailTourGuideActivity.class);
+        intent.putExtra("id_guide", idGuide);
         startActivity(intent);
     }
 

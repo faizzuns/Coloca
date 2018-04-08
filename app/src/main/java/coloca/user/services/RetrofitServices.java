@@ -14,23 +14,23 @@ public class RetrofitServices {
         return RetrofitClientUtils.client().create(AllGuideService.class);
     }
 
-    public DestinationService sendDestinationRequest(){
+    public static DestinationService sendDestinationRequest(){
         return RetrofitClientUtils.client().create(DestinationService.class);
     }
 
-    public DetailGuideService sendDetailGuideRequest(){
+    public static DetailGuideService sendDetailGuideRequest(){
         return RetrofitClientUtils.client().create(DetailGuideService.class);
     }
 
-    public PlaceService sendPlaceRequest(){
+    public static PlaceService sendPlaceRequest(){
         return RetrofitClientUtils.client().create(PlaceService.class);
     }
 
-    public RouteService sendRouteRequest(){
+    public static RouteService sendRouteRequest(){
         return RetrofitClientUtils.client().create(RouteService.class);
     }
 
-    public TopTenService sendTopTenRequest(){
+    public static TopTenService sendTopTenRequest(){
         return RetrofitClientUtils.client().create(TopTenService.class);
     }
 }

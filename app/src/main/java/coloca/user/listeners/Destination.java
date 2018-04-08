@@ -1,5 +1,6 @@
 package coloca.user.listeners;
 
+import coloca.user.models.destination.Review;
 import coloca.user.models.tweet.TweetResult;
 
 /**
@@ -8,6 +9,6 @@ import coloca.user.models.tweet.TweetResult;
 
 public interface Destination {
     interface OnReviewClicked{
-        void onClick(TweetResult tweetResult);
+        void onClick(Review tweetResult);
     }
 }

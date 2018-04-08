@@ -21,6 +21,12 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import coloca.user.models.guide.TourGuideModel;
+import coloca.user.models.guide.TourGuideResult;
+import coloca.user.services.RetrofitServices;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DetailTourGuideActivity extends AppCompatActivity {
 
@@ -46,7 +52,31 @@ public class DetailTourGuideActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Picasso.with(getApplicationContext()).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0SNB_ZVcARJpr_j8zd2q0aw8n0jAjYaQBnN7YBuaMijfJCSWy").into(imgPhoto);
+        RetrofitServices.sendDetailGuideRequest().callDetailGuide(getIntent().getIntExtra("id_guide",0))
+                .enqueue(new Callback<TourGuideModel>() {
+                    @Override
+                    public void onResponse(Call<TourGuideModel> call, Response<TourGuideModel> response) {
+                        if (response.body() != null){
+                            if (response.body().getError() == null){
+                                TourGuideResult tourGuideResult = response.body().getTourGuideResult();
+                                Picasso.with(getApplicationContext()).load(tourGuideResult.getImgUrl()).into(imgPhoto);
+                                txtName.setText(tourGuideResult.getName());
+                                String s = "";
+                                for (String ss : tourGuideResult.getListLocation()) s += " " + ss;
+                                txtLocation.setText("Location : " + s);
+
+                                s = "";
+                                for (String ss : tourGuideResult.getListLanguage()) s += " " + ss;
+                                txtLanguage.setText("Language : " + s);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<TourGuideModel> call, Throwable t) {
+
+                    }
+                });
 
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override

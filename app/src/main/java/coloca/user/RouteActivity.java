@@ -11,7 +11,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import coloca.user.adapters.RouteAdapter;
+import coloca.user.models.route.RouteModel;
 import coloca.user.models.route.RouteResult;
+import coloca.user.services.RetrofitServices;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RouteActivity extends AppCompatActivity {
 
@@ -32,9 +37,22 @@ public class RouteActivity extends AppCompatActivity {
 
     private void callDataRoute() {
         listRoute = new ArrayList<>();
-        listRoute.add(new RouteResult("http://1.bp.blogspot.com/-s0M7sTp5Ilo/U2YhWZ9qLjI/AAAAAAAAA2s/h6yqW10rGdA/s1600/Trayek+06+angkot+bogor.png","http://1.bp.blogspot.com/-s0M7sTp5Ilo/U2YhWZ9qLjI/AAAAAAAAA2s/h6yqW10rGdA/s1600/Trayek+06+angkot+bogor.png","Stasiun Karang Bunga", "Stasiun BUnga Ayam"));
-        listRoute.add(new RouteResult("http://1.bp.blogspot.com/-s0M7sTp5Ilo/U2YhWZ9qLjI/AAAAAAAAA2s/h6yqW10rGdA/s1600/Trayek+06+angkot+bogor.png","http://1.bp.blogspot.com/-s0M7sTp5Ilo/U2YhWZ9qLjI/AAAAAAAAA2s/h6yqW10rGdA/s1600/Trayek+06+angkot+bogor.png","Stasiun Bunga Ayam", "Hotel Horison"));
-        routeAdapter.refreshData(listRoute);
+        Call<RouteModel> call = RetrofitServices.sendRouteRequest().callRoute("apa aja","apa aja");
+        call.enqueue(new Callback<RouteModel>() {
+            @Override
+            public void onResponse(Call<RouteModel> call, Response<RouteModel> response) {
+                if (response.body() != null){
+                    if (response.body().getError() == null){
+                        if (routeAdapter != null) routeAdapter.refreshData(response.body().getList());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RouteModel> call, Throwable t) {
+
+            }
+        });
     }
 
     private void setDataRoute() {

@@ -18,6 +18,7 @@ import coloca.user.R;
 import coloca.user.listeners.Destination;
 import coloca.user.listeners.Main;
 import coloca.user.models.destination.DestinationResult;
+import coloca.user.models.destination.Review;
 import coloca.user.models.guide.TourGuideResult;
 import coloca.user.models.tweet.TweetResult;
 
@@ -28,10 +29,10 @@ import coloca.user.models.tweet.TweetResult;
 public class DetailDestinationAdapter extends RecyclerView.Adapter<DetailDestinationAdapter.ViewHolder>{
 
     Destination.OnReviewClicked listener;
-    List<TweetResult> list;
+    List<Review> list;
     Context context;
 
-    public DetailDestinationAdapter(Destination.OnReviewClicked listener, List<TweetResult> list, Context context) {
+    public DetailDestinationAdapter(Destination.OnReviewClicked listener, List<Review> list, Context context) {
         this.listener = listener;
         this.list = list;
         this.context = context;
@@ -60,9 +61,9 @@ public class DetailDestinationAdapter extends RecyclerView.Adapter<DetailDestina
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final TweetResult tweetResult= list.get(position);
+        final Review tweetResult= list.get(position);
 
-        holder.txtTime.setText(tweetResult.getTime());
+        holder.txtTime.setText(tweetResult.getDate());
         holder.txtTweet.setText(tweetResult.getTweet());
         holder.txtUsername.setText(tweetResult.getUsername());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +83,7 @@ public class DetailDestinationAdapter extends RecyclerView.Adapter<DetailDestina
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
     }
-    public void refreshData(List<TweetResult> list){
+    public void refreshData(List<Review> list){
         this.list = list;
         notifyDataSetChanged();
     }

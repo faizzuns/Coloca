@@ -15,14 +15,19 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import coloca.user.adapters.DestinationAdapter;
 import coloca.user.listeners.Main;
+import coloca.user.models.destination.AllPlaceModel;
 import coloca.user.models.destination.DestinationResult;
+import coloca.user.services.RetrofitServices;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ResultDestinationActivity extends AppCompatActivity {
 
     @BindView(R.id.rv_result_destination)
     RecyclerView rvResult;
 
-    List<DestinationResult> listDestination;
+    List<AllPlaceModel.PlaceData> listDestination;
     DestinationAdapter destinationAdapter;
 
     @Override
@@ -49,9 +54,9 @@ public class ResultDestinationActivity extends AppCompatActivity {
 
         destinationAdapter = new DestinationAdapter(new Main.OnDestinationClicked() {
             @Override
-            public void onClick(DestinationResult destinationResult) {
+            public void onClick(AllPlaceModel.PlaceData destinationResult) {
                 //Toast.makeText(MainActivity.this, destinationResult.getDestinationName(), Toast.LENGTH_SHORT).show();
-                goToDetailDestination();
+                goToDetailDestination(destinationResult.getId());
             }
         }, listDestination, getApplicationContext());
         rvResult.setAdapter(destinationAdapter);
@@ -59,17 +64,26 @@ public class ResultDestinationActivity extends AppCompatActivity {
 
     private void callDestinationData() {
         listDestination = new ArrayList<>();
-        //listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/ALDO1553_edit.jpg", "Danau Toba"));
-        listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/DSC00368.jpg", "Pantai Tanjung Kelayang"));
-        listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/DSC_0409.jpg", "Pantai Tanjung Lesung"));
-        //listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/pulau-ayer-2-kep-seribu.jpg", "Kepulauan Seribu"));
-        //listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/DIY-BOROBUDUR-SUNSET-1.jpg", "Candi Borobudur"));
-        //listDestination.add(new DestinationResult(1, "https://blog.traveloka.com/wp-content/uploads/2017/08/bromo_20140505232301-d7ff595f.jpg", "Gunung Bromo"));
-        destinationAdapter.refreshData(listDestination);
+        Call<AllPlaceModel> call = RetrofitServices.sendPlaceRequest().callPlace(getIntent().getStringExtra("search"),20,0);
+        call.enqueue(new Callback<AllPlaceModel>() {
+            @Override
+            public void onResponse(Call<AllPlaceModel> call, Response<AllPlaceModel> response) {
+                if (response.body() != null){
+                    if (response.body().getError() == null){
+                        if (destinationAdapter != null) destinationAdapter.refreshData(response.body().getList());
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<AllPlaceModel> call, Throwable t) {
+
+            }
+        });
     }
 
-    private void goToDetailDestination(){
+    private void goToDetailDestination(int id){
         Intent intent = new Intent(getApplicationContext(), DetailDestinationActivity.class);
+        intent.putExtra("id_dest",id);
         startActivity(intent);
     }
 }
