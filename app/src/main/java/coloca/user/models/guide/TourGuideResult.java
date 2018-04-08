@@ -1,15 +1,36 @@
 package coloca.user.models.guide;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 /**
  * Created by User on 18/03/2018.
  */
 
 public class TourGuideResult {
+    @SerializedName("")
+    @Expose
     private int id;
+    @SerializedName("")
+    @Expose
     private String imgUrl;
+    @SerializedName("")
+    @Expose
     private String name;
-    private String location;
-    private String language;
+    @SerializedName("")
+    @Expose
+    private String email;
+    @SerializedName("")
+    @Expose
+    private String phone;
+    @SerializedName("")
+    @Expose
+    private List<String> location;
+    @SerializedName("")
+    @Expose
+    private List<String> language;
 
     public TourGuideResult(int id, String imgUrl, String name) {
         this.id = id;
@@ -17,7 +38,7 @@ public class TourGuideResult {
         this.name = name;
     }
 
-    public TourGuideResult(int id, String imgUrl, String name, String location, String language) {
+    public TourGuideResult(int id, String imgUrl, String name, List<String> location, List<String> language) {
         this.id = id;
         this.imgUrl = imgUrl;
         this.name = name;
@@ -25,20 +46,30 @@ public class TourGuideResult {
         this.language = language;
     }
 
-    public String getLocation() {
+    public TourGuideResult(int id, String imgUrl, String name, String email, String phone, List<String> location, List<String> language) {
+        this.id = id;
+        this.imgUrl = imgUrl;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.location = location;
+        this.language = language;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public List<String> getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getLanguage() {
+    public List<String> getLanguage() {
         return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
     }
 
     public int getId() {
