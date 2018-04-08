@@ -28,10 +28,10 @@ public class TourGuideResult {
     @SerializedName("phone")
     @Expose
     private String phone;
-    @SerializedName("")
+    @SerializedName("language")
     @Expose
     private List<String> listLanguage;
-    @SerializedName("")
+    @SerializedName("city")
     @Expose
     private List<String> listLocation;
 

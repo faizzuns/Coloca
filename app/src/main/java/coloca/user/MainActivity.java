@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void callDestinationData() {
         listDestination = new ArrayList<>();
-        Call<AllPlaceModel> call = RetrofitServices.sendTopTenRequest().callTopTen();
+        Call<AllPlaceModel> call = RetrofitServices.sendPlaceRequest().callPlace(null,10,0);
         call.enqueue(new Callback<AllPlaceModel>() {
             @Override
             public void onResponse(Call<AllPlaceModel> call, Response<AllPlaceModel> response) {

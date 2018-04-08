@@ -72,6 +72,7 @@ public class DetailDestinationActivity extends AppCompatActivity {
         btnTourGuide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                rvReview.setVisibility(View.GONE);
                 goToListTourGuide();
             }
         });
@@ -79,6 +80,7 @@ public class DetailDestinationActivity extends AppCompatActivity {
         btnRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                rvReview.setVisibility(View.GONE);
                 goToDetailRoute();
             }
         });
@@ -100,9 +102,9 @@ public class DetailDestinationActivity extends AppCompatActivity {
                         txtDestination.setText(destinationResult.getName());
                         txtProvince.setText("Province : " + destinationResult.getProvince());
                         txtCountry.setText("Country : " + destinationResult.getCountry());
-                        txtTimezone.setText("GMT " + destinationResult.getTimezone());
+                        txtTimezone.setText("Timezone : GMT " + destinationResult.getTimezone());
                         txtRating.setText("Rating : " + destinationResult.getRating());
-                        txtEstimatedCost.setText("Rp. " + destinationResult.getCost());
+                        txtEstimatedCost.setText("Estimated Cost : Rp. " + destinationResult.getCost());
 
                         setDataTweet();
                         callData();
@@ -161,7 +163,7 @@ public class DetailDestinationActivity extends AppCompatActivity {
 
     private void goToListTourGuide(){
         Intent intent = new Intent(getApplicationContext(), ListTourGuideActivity.class);
-        intent.putExtra("id_place",idDest);
+        intent.putExtra("id_city",destinationResult.getCity());
         startActivity(intent);
     }
 }

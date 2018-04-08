@@ -66,8 +66,16 @@ public class TourGuideAdapter extends RecyclerView.Adapter<TourGuideAdapter.View
 
         Picasso.with(context).load(tourGuideResult.getImgUrl()).into(holder.imgPhotoTour);
         holder.txtName.setText(tourGuideResult.getName());
-        if (tourGuideResult.getListLocation().size() != 0) holder.txtLocation.setText(tourGuideResult.getListLocation().get(0));
-        if (tourGuideResult.getListLanguage().size() != 0) holder.txtLanguage.setText(tourGuideResult.getListLanguage().get(0));
+        if (tourGuideResult.getListLocation().size() != 0) {
+            String s = "";
+            for (String ss : tourGuideResult.getListLocation()) s += "," + ss;
+            holder.txtLocation.setText("Location : " + s);
+        }
+        if (tourGuideResult.getListLanguage().size() != 0){
+            String s = "";
+            for (String ss : tourGuideResult.getListLanguage()) s += "," + ss;
+            holder.txtLanguage.setText("Language : " + s);
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

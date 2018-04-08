@@ -19,6 +19,10 @@ import coloca.user.adapters.TourGuideAdapter;
 import coloca.user.listeners.Main;
 import coloca.user.models.guide.AllTourGuideModel;
 import coloca.user.models.guide.TourGuideResult;
+import coloca.user.services.RetrofitServices;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ListTourGuideActivity extends AppCompatActivity {
 
@@ -77,6 +81,22 @@ public class ListTourGuideActivity extends AppCompatActivity {
 
     private void callTourGuideData(){
         listTour = new ArrayList<>();
+        RetrofitServices.sendAllGuideRequest().callAllGuide(null,getIntent().getStringExtra("id_city"),20,0)
+                .enqueue(new Callback<AllTourGuideModel>() {
+                    @Override
+                    public void onResponse(Call<AllTourGuideModel> call, Response<AllTourGuideModel> response) {
+                        if (response.body() != null){
+                            if (response.body().getError() == null){
+                                adapter.refreshData(response.body().getList());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AllTourGuideModel> call, Throwable t) {
+
+                    }
+                });
         adapter.refreshData(listTour);
     }
 

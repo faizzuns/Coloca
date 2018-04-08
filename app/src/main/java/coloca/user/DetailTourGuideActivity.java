@@ -21,6 +21,7 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import coloca.user.models.guide.AllTourGuideModel;
 import coloca.user.models.guide.TourGuideModel;
 import coloca.user.models.guide.TourGuideResult;
 import coloca.user.services.RetrofitServices;
@@ -53,27 +54,27 @@ public class DetailTourGuideActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         RetrofitServices.sendDetailGuideRequest().callDetailGuide(getIntent().getIntExtra("id_guide",0))
-                .enqueue(new Callback<TourGuideModel>() {
+                .enqueue(new Callback<AllTourGuideModel>() {
                     @Override
-                    public void onResponse(Call<TourGuideModel> call, Response<TourGuideModel> response) {
+                    public void onResponse(Call<AllTourGuideModel> call, Response<AllTourGuideModel> response) {
                         if (response.body() != null){
                             if (response.body().getError() == null){
-                                TourGuideResult tourGuideResult = response.body().getTourGuideResult();
+                                AllTourGuideModel.TourGuideData tourGuideResult = response.body().getList().get(0);
                                 Picasso.with(getApplicationContext()).load(tourGuideResult.getImgUrl()).into(imgPhoto);
                                 txtName.setText(tourGuideResult.getName());
                                 String s = "";
-                                for (String ss : tourGuideResult.getListLocation()) s += " " + ss;
+                                for (String ss : tourGuideResult.getListLocation()) s += "," + ss;
                                 txtLocation.setText("Location : " + s);
 
                                 s = "";
-                                for (String ss : tourGuideResult.getListLanguage()) s += " " + ss;
+                                for (String ss : tourGuideResult.getListLanguage()) s += "," + ss;
                                 txtLanguage.setText("Language : " + s);
                             }
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<TourGuideModel> call, Throwable t) {
+                    public void onFailure(Call<AllTourGuideModel> call, Throwable t) {
 
                     }
                 });

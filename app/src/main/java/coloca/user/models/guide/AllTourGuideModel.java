@@ -39,10 +39,10 @@ public class AllTourGuideModel {
         @SerializedName("img_url")
         @Expose
         private String imgUrl;
-        @SerializedName("")
+        @SerializedName("language")
         @Expose
         private List<String> listLanguage;
-        @SerializedName("")
+        @SerializedName("city")
         @Expose
         private List<String> listLocation;
 
